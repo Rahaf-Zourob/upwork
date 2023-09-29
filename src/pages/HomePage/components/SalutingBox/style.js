@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 export const SalutingCard = styled(BorderCard)`
 padding: 0 35px;
+overflow: hidden;
 `;
 export const TodayDate = styled(H4)`
 font-family: Arial, Helvetica, sans-serif;
@@ -12,6 +13,5 @@ margin-bottom: 10px;
 export const SalutingByName = styled(H2)`
 width: max-content;
 font-weight: 800;
-font-size: 3rem;
 font-family: "Times New Roman", Times, serif;
 `

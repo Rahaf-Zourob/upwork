@@ -10,25 +10,25 @@ import ProfileSide from './components/ProfileSide'
 import { StyledFlex } from './components/ProfileInfo/style'
 
 export default function ProfilePage() {
-  const { name,object,isLoading } = useSelector(state => state.profile)
+  const { name, object, isLoading } = useSelector(state => state.profile)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getData())
     dispatch(getName())
   }, [])
-  const userName =!isLoading?( name?.firstName + " "+ name?.lastName?.charAt(0)+".") : "Loading..."
-  console.log(object?.data)
+  const userName = !isLoading ? (name?.firstName + " " + name?.lastName?.charAt(0) + ".") : "Loading..."
+
   return (
     <MainLayout>
-      <BorderCard style={{marginBottom:"5rem"}}>
-      <ProfileInfo name={userName} addres={object?.data?.addres}/>
-      <StyleFlex>
-        <ProfileSide eduction={object?.data?.education}/>
-      <ProfileDiscription jobtitle={object?.data?.jobTitle} 
-      jobdescription={object?.data?.jobDescription} hourPrice={object?.data?.price}
-      userSkills={object?.skills}
-      />
-      </StyleFlex>
+      <BorderCard style={{ marginBottom: "5rem" }}>
+        <ProfileInfo name={userName} addres={object?.data?.addres} />
+        <StyleFlex>
+          <ProfileSide eduction={object?.data?.education} />
+          <ProfileDiscription jobtitle={object?.data?.jobTitle}
+            jobdescription={object?.data?.jobDescription} hourPrice={object?.data?.price}
+            userSkills={object?.skills}
+          />
+        </StyleFlex>
       </BorderCard>
     </MainLayout>
   )

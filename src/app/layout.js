@@ -2,11 +2,11 @@
 import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
 
-import StyledComponentsRegistry from './lib/registry';
+import StyledComponentsRegistry from '../styles/lib/registry';
 
 import store from '@/redux/store';
 
-import './globals.css'
+import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

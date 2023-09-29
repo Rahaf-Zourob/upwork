@@ -21,7 +21,9 @@ import Loading from '@/pages/loading';
 
 export default function Jobs() {
     const [value, setValue] = useState('1');
-    const { jobs, job, isLoading, jobSaved, skills } = useSelector((state) => state.jobs);
+    const [matchJob, setMatchJob] = useState([])
+    const { jobs, isLoading, jobSaved } = useSelector((state) => state.jobs);
+    const { object } = useSelector(state => state.profile)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -30,8 +32,14 @@ export default function Jobs() {
     useEffect(() => {
         dispatch(getJobs())
         dispatch(getSavedJob())
-        dispatch(getMostRecent())
-    }, [])
+        jobs?.forEach((innerArray) => {
+            innerArray?.skills?.forEach((valueToCompare) => {
+                if (object.skills.includes(valueToCompare)) {
+                    setMatchJob((prev) => [...prev, innerArray]);
+                }
+            });
+        });
+    }, [value]);
     const handleJobClick = (id) => {
         const adeddJob = jobs.find(item => item.id === id)
         if (jobSaved.find(item => item.id === adeddJob.id)) {
@@ -78,16 +86,30 @@ export default function Jobs() {
                 <TabPanel
                     sx={{ "padding": "0" }}
                     value="2">
+                    {matchJob.length !== 0 ?
+                        matchJob.map((job) => (
+                            <JobCard handleClick={(event) => {
+                                event.stopPropagation();
+                                handleJobClick(job.id);
+                            }}
+                                key={job.id} data={job} btn={
+                                    jobSaved.find((item) => item.id === job.id) ?
+                                        <FavoriteOutlinedIcon />
+                                        : <FavoriteBorderOutlinedIcon />} />))
+
+                        : <NoJob match />
+                    }
                 </TabPanel>
                 <TabPanel
                     sx={{ "padding": "0" }}
                     value="3">
                     {saveNum === 0 ? <NoJob />
                         : (jobSaved?.map((job) => (
-                            <JobCard key={job.id} 
-                            handleClick={(event) => {
-                                event.stopPropagation();
-                                handleJobClick(job.id)}}
+                            <JobCard key={job.id}
+                                handleClick={(event) => {
+                                    event.stopPropagation();
+                                    handleJobClick(job.id)
+                                }}
                                 data={job} btn={<FavoriteOutlinedIcon />} />
                         ))
                         )

@@ -39,10 +39,6 @@ export const jobSlice = createSlice({
       state.jobSaved = [...state.jobSaved.filter((item) => item.id !== action.payload)];
       state.isLoading = false;
     },
-    addRecentJobData: (state, action) => {
-      state.userSkilles =  action.payload;
-      state.isLoading = false;
-    },
     getJobsSkills: (state, action) => {
       state.skills = action.payload;
       state.isLoading = false;
@@ -53,14 +49,13 @@ export const jobSlice = createSlice({
     },
   },
 });
-const { setLoading, getSavedData, addJobs, removeJobs, getJobsData, getJobData ,addRecentJobData,getJobsSkills} = jobSlice.actions;
+const { setLoading, getSavedData, addJobs, removeJobs, getJobsData, getJobData, getJobsSkills } = jobSlice.actions;
 
 export const getJobs = () => async (dispatch) => {
   try {
     dispatch(setLoading());
     const { data } = await axios.get(ApiUrl + AUTH_API_PATHS.JOBS);
     dispatch(getJobsData(data));
-    // dispatch(getJobsSkills(data.map((skill)=>skill.skills)))
   } catch (error) {
     console.log(error);
   }
@@ -85,16 +80,6 @@ export const getJob = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-
-export const getMostRecent = () =>async(dispatch)=>{
-  const id = localStorage.getItem('id')
-  try{
-  const { data } = await axios.get(ApiUrl + AUTH_API_PATHS.PROFILE + '/'+id);
-  dispatch(addRecentJobData(data.skills));
-} catch (error) {
-  console.log(error);
-}
-}
 
 export const addJob = (body) => async (dispatch) => {
   try {
