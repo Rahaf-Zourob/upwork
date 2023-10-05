@@ -19,7 +19,7 @@ export default function SearchJob() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    router.push(`${PATH.FILTER}/?q=${search}`);
+    router.push(`${PATH.FILTER}/${search}`);
     const updatedRecentSearches = [search, ...recentSearches.slice(0, 4)];
     localStorage.setItem("recentSearche", JSON.stringify(updatedRecentSearches));
   };
