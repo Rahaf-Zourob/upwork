@@ -24,9 +24,8 @@ export const { setIsLoading, getMatchJobData } = searchSlice.actions;
 
 export const getMatchJobs = (value) => async (dispatch) => {
     try {
-        const { data } = await axios.getUri(ApiUrl + AUTH_API_PATHS.JOBS + `/?q=${value}`)
+        const {data}  = await axios.get(ApiUrl + AUTH_API_PATHS.JOBS + `/?q=${value}`)
         dispatch(getMatchJobData(data))
-        console.log(data)
     } catch (error) {
         console.log(error)
     }
