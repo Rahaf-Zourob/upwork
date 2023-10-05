@@ -3,7 +3,8 @@ export const AUTH_API_PATHS = {
     SIGNUP: "auth",
     PROFILE: "profile",
     JOBS: "jobs",
-    SAVEDJOBS: "savedJobs"
+    SAVEDJOBS: "savedJobs",
+    MOSTRECENT: "mostRecent"
   };
   export const AUTH_ACTIONS = {
     AUTHENTICATE: "AUTHENTICATE",

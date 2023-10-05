@@ -1,12 +1,17 @@
+"use client"
+
 import React, { useEffect, useState } from 'react'
-import { PaddingInfo, SeeProfile, SettingBtn, StyledFlex, UserStatus } from './style'
+import { useDispatch, useSelector } from 'react-redux'
 import { Avatar } from '@mui/material'
-import { StyledColumn, StyledFlexEquleSapces } from '@/styles/commen'
-import { Body3, Body5, H2, H4, LightBody1 } from '@/components/atoms/Typography/style'
+
 import { Location } from '@/svg/HomeImges'
 import { GapFlex } from '@/pages/HomePage/components/Jobs/components/JobCard/style'
+
+import { PaddingInfo, SeeProfile, SettingBtn, StyledFlex, UserStatus } from './style'
+import { StyledColumn, StyledFlexEquleSapces } from '@/styles/commen'
+import { H2, LightBody1 } from '@/components/atoms/Typography/style'
 import { ApplayBtn, SaveBtn, StyleSvg } from '@/modals/JobModal/style'
-import { useDispatch, useSelector } from 'react-redux'
+import { colors } from '@/styles/colors'
 
 export default function ProfileInfo({ name, addres }) {
     const [timeNow, setTimeNow] = useState(null);
@@ -45,7 +50,7 @@ export default function ProfileInfo({ name, addres }) {
                     <H2 style={{fontWeight:400}}>{name}</H2>
                     <StyledFlexEquleSapces width='max-content'>
                         <div>{Location}</div>
-                        <LightBody1>{addres} - {timeNow} {session}</LightBody1>
+                        <LightBody1 style={{color: colors.palette.gray1}}>{addres} - {timeNow === null ? 'Loading...': timeNow} {session} local time</LightBody1>
                     </StyledFlexEquleSapces>
                 </StyledColumn>
             </StyledFlex>

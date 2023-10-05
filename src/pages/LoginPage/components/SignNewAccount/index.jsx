@@ -1,5 +1,5 @@
+'use client'
 import React from 'react'
-
 import { PATH } from '@/router/path'
 
 import { HaveAccount, SigninLink } from './style'

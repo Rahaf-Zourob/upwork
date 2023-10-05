@@ -1,7 +1,7 @@
 "use client"
 
+'use client'
 import React from 'react'
-
 import Form from '@/components/atoms/Form'
 import FormLogin from './components/FormLogin'
 import ButtonLogin from './components/ButtonLogin'

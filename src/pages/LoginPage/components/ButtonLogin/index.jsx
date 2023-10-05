@@ -1,7 +1,7 @@
 "use client"
 
+'use client'
 import React from 'react'
-
 import { BFLine } from '../BFLine'
 import { AppleImage } from '@/svg/InputImage'
 

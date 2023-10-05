@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Avatar from '@mui/material/Avatar';
@@ -12,7 +14,7 @@ import { StyledColumnCenter, StyledSvg } from '@/styles/commen'
 import { Body5, LightBody1 } from '@/components/atoms/Typography/style'
 import { getName } from '@/redux/slices/profile';
 
-export default function ProfileBox() {
+export default function ProfileBox({id}) {
   const { logout } = useAuth()
   const { name } = useSelector((state) => state.profile)
 
@@ -24,7 +26,7 @@ export default function ProfileBox() {
   const handleInvisable = () => {
     dispatch(setInvisable())
   }
-  useEffect(()=>{dispatch(getName())},[])
+  useEffect(()=>{dispatch(getName(id))},[])
   return (
     <BoxBackground>
       <StyledColumnCenter>

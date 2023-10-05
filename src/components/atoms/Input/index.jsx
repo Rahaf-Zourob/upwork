@@ -19,7 +19,9 @@ export default function Input({
   paddingwrap, 
   color,
   err,
-  value
+  value,
+  handleChange,
+  disable
 }) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -83,6 +85,8 @@ export default function Input({
               value={value}
               {...(register && register(id))}
               padding={padding || '0.2rem'}
+              onChange={handleChange}
+              disabled={disable}
             />
           </InputWrap>
       )}

@@ -33,7 +33,7 @@ export default function SalutingBox() {
     }
   };
   useEffect(() => {
-    dispatch(getName())
+    dispatch(getName(id))
   }, [])
   const userName = name?.firstName + " " + name?.lastName
   return (

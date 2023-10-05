@@ -1,5 +1,6 @@
-import { colors } from "@/styles/colors";
 import styled from "styled-components";
+
+import { colors } from "@/styles/colors";
 
 export const InputWrap = styled.div`
 display: flex;
@@ -34,16 +35,29 @@ padding: ${props.padding};
 border: ${props.border || '0'};
 border-radius: ${props.radius || '8px'};
 `};
-
 &:focus {
     color: ${colors.palette.black};
+}
+&:disabled {
+  pointer-events:none;
+  color:${colors.palette.gray1};
+  background: ${colors.palette.gray5};
 }
 `;
 
 export const StyleLable = styled.label`
+    display: flex;
+    flex-direction: column;
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-    letter-spacing: -0.0125rem;
+    letter-spacing: -0.05px;
     color: ${colors.palette.black};
+    span{
+      font-size: 12px;
+      letter-spacing: 0px;
+      display: flex;
+      align-items: center;
+      width: max-content;
+    }
 `

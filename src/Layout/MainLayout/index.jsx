@@ -1,5 +1,6 @@
+'use client'
+'use client'
 import React from 'react'
-
 import Footer from '@/components/molecules/Footer'
 import MainHeader from '@/components/molecules/MainHeader'
 

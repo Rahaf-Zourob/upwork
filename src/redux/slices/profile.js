@@ -1,3 +1,5 @@
+
+"use client"
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -8,99 +10,98 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState: {
     object: null,
-    isLoading: false,
-    jobTitle: [],
+    isLoading: true,
     name: null,
-    skills: null
   },
   reducers: {
-    setLoading: (state, { payload = true }) => {
+    setLoading: (state, { payload = false }) => {
       state.isLoading = payload;
     },
     getProfileData: (state, action) => {
       state.object = action.payload;
-      state.isLoading = false;
     },
     getNameData: (state, action) => {
       state.name = action.payload;
-      state.isLoading = false;
-    },
-    setJobTitleData: (state, action) => {
-      state.jobTitle = state.jobTitle.map((job) =>
-      job.id === action.payload.id ? action.payload : job
-    );
-      state.isLoading = false;
     },
     setProfileData: (state, action) => {
       state.object = action.payload;
-      state.isLoading = false;
-    },
-    setSkillsData: (state, action) => {
-      state.skills = [...state.skills,action.payload],
-      state.isLoading = false;
-    },
+    }
   },
 });
-const { getProfileData, setProfileData, setSkillsData, setLoading,setJobTitleData,getNameData } = profileSlice.actions;
+const { getProfileData, setProfileData, setLoading, getNameData } = profileSlice.actions;
 
-const id = (typeof window !== 'undefined') ? localStorage.getItem('id') :'';
-
-export const getData = () => async (dispatch) => {
+export const getData = (id) => async (dispatch) => {
   try {
-    dispatch(setLoading());
     const { data } = await axios.get(ApiUrl + AUTH_API_PATHS.PROFILE + '/' + id);
     dispatch(getProfileData(data));
   } catch (error) {
     console.log(error);
   }
+  dispatch(setLoading());
 };
-export const getName = () => async (dispatch) => {
-    dispatch(setLoading());
+
+export const getName = (id) => async (dispatch) => {
   try {
-    dispatch(setLoading());
-    const { data } = await axios.get(ApiUrl + AUTH_API_PATHS.SIGNUP+'/'+ id);
+    const { data } = await axios.get(ApiUrl + AUTH_API_PATHS.SIGNUP + '/' + id);
     dispatch(getNameData(data));
   } catch (error) {
     console.log(error);
   }
+  dispatch(setLoading());
 };
 
 export const addData = (body) => async (dispatch) => {
-  dispatch(setLoading());
   try {
-    const {data} = await axios.post(ApiUrl + AUTH_API_PATHS.PROFILE, body);
+    const { data } = await axios.post(ApiUrl + AUTH_API_PATHS.PROFILE, body);
     dispatch(setProfileData(data));
   } catch (error) {
     console.log(error);
   }
+  dispatch(setLoading());
 };
-export const editJobTitle = (data) => async (dispatch) => {
-  console.log(data)
+export const editJobTitle = (id, oldData, body) => async (dispatch) => {
+  const data = {
+    ...oldData,
+    jobTitle: body
+  }
   try {
-    dispatch(setLoading());
-    await axios.put(ApiUrl + AUTH_API_PATHS.PROFILE+"/"+id, data);
-    dispatch(setJobTitleData(data));
+    await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE + "/" + id, { data: data });
   } catch (error) {
     console.log(error)
   }
-};
-
-export const editHourPrice = (body) => async (dispatch) => {
   dispatch(setLoading())
+};
+export const editHourPrice = (id, oldData, body) => async (dispatch) => {
+  const data = {
+    ...oldData,
+    price: body
+  }
   try {
-
+    await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE + "/" + id, { data: data });
   } catch (error) {
     console.log(error)
   }
-}
+  dispatch(setLoading());
+};
+export const editJobDescription = (id, oldData, body) => async (dispatch) => {
+  const data = {
+    ...oldData,
+    jobDescription: body
+  }
+  try {
+    await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE + "/" + id, { data: data });
+  } catch (error) {
+    console.log(error)
+  }
+  dispatch(setLoading());
+};
+
 export const editSkills = (body) => async (dispatch) => {
-  dispatch(setLoading())
-  try {
-    const data = await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE+"/"+id,body)
-    console.log(data)
-    dispatch(setSkillsData())
-  } catch (error) {
-    console.log(error)
-  }
+  // try {
+  //   await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE + "/" + id, body)
+  // } catch (error) {
+  //   console.log(error)
+  // }
+  // dispatch(setLoading())
 }
 export default profileSlice.reducer;

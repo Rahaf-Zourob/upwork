@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { BgFooter, CopyRight, PrivcyLink } from './style'
 import { ContainerLayOut } from '@/components/atoms/ContainerLayOut/style'

@@ -5,7 +5,7 @@ export const colors = {
 
   palette: {
     white: "#fff",
-    black: "#000", 
+    black: "#000",
     gray1: "#5e6d55",
     gray2: "#aeadad",
     gray3: "#606060",
@@ -18,13 +18,13 @@ export const colors = {
     darkBlue: "#1f57c3",
     red: "#9b211b",
   },
-  
+
   hover: {
     green: "#14a800",
     lightGreen: "#a5cb9f",
     gray1: "#9aaa97"
   },
-  
+
   border: {
     primaryBorder: "1px solid #5e6d55",
     inputBorder: "2px solid #e4ebe4",
@@ -32,6 +32,7 @@ export const colors = {
     dark: "1px solid #000",
     green: "2px solid #108a00",
     card: "1px solid #d5e0d5",
-    red: "2px solid #9b211b"
+    red: "2px solid #9b211b",
+    gray: "2px solid #5e6d55"
   },
 };

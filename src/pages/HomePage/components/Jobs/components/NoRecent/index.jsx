@@ -1,7 +1,7 @@
 import { H4 } from '@/components/atoms/Typography/style'
 import { StyledColumnCenter } from '@/styles/commen'
+'use client'
 import React from 'react'
-
 export default function NoRecent() {
   return (
     <StyledColumnCenter gap='1rem'>

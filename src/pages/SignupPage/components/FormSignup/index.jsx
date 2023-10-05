@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
 
@@ -56,7 +56,7 @@ export default function FormSignup() {
                 name='lastName'
                 type='text'
                 id='lastName'
-                placeholder='lastName'
+                placeholder='Last Name'
                 err={error}
               />
               {errors.lastName && <Error err>{errors.lastName.message}</Error>}

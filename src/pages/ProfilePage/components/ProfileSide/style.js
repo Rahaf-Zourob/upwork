@@ -1,6 +1,9 @@
+import styled from "styled-components";
+
+import Button from "@/components/atoms/Button";
+
 import { colors } from "@/styles/colors";
 import { StyleFlex, StyledColumn, StyledFlexEquleSapces } from "@/styles/commen";
-import styled from "styled-components";
 
 export const SideBar = styled(StyledColumn)`
 height: 100%;
@@ -21,4 +24,13 @@ h5{
     width: max-content;
     gap: 8px;
 };
+`
+export const ButtonSideBar = styled(Button)`
+border: ${colors.border.gray};
+color: ${colors.palette.gray1};
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 500;
+gap: 7px;
 `

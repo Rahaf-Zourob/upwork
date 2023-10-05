@@ -2,44 +2,50 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addJob, deleteJob, getJobs, getMostRecent, getSavedJob } from '@/redux/slices/job';
 import Box from '@mui/material/Box';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
+import Loading from '@/pages/loading'
 import JobCard from './components/JobCard';
 import NoJob from './components/NoJob';
 
-import { JobWrap } from './style';
-import { colors } from '@/styles/colors';
-
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import { SavedJob } from '@/svg/HomeImges';
-import Loading from '@/pages/loading';
 
+import { JobWrap, LoadMoreBtn } from './style';
+import { colors } from '@/styles/colors';
 
 export default function Jobs() {
     const [value, setValue] = useState('1');
-    const [matchJob, setMatchJob] = useState([])
-    const { jobs, isLoading, jobSaved } = useSelector((state) => state.jobs);
+    const [recent, setRecentJobs] = useState([])
+    const { jobs, isLoading, jobSaved, recentJobs } = useSelector((state) => state.jobs);
     const { object } = useSelector(state => state.profile)
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    const saveNum = jobSaved.length
+    const [count, setCount] = useState(2)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getJobs())
         dispatch(getSavedJob())
-        jobs?.forEach((innerArray) => {
-            innerArray?.skills?.forEach((valueToCompare) => {
-                if (object.skills.includes(valueToCompare)) {
-                    setMatchJob((prev) => [...prev, innerArray]);
-                }
-            });
-        });
-    }, [value]);
+        // if (jobs !== []) {
+        //     console.log(55)
+        //     jobs.map((job) => {
+        //       job?.skills?.map((sameSkill) => {
+        //         if (object?.skills.includes(sameSkill)) {
+        //             setRecentJobs([job])
+        //         }
+        //       })
+        //     })
+        //   }
+    }, [])
+    // console.log(recentJobs)
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    // console.log(recent)
+    ;
+    const saveNum = jobSaved.length
     const handleJobClick = (id) => {
         const adeddJob = jobs.find(item => item.id === id)
         if (jobSaved.find(item => item.id === adeddJob.id)) {
@@ -47,7 +53,7 @@ export default function Jobs() {
         } else {
             dispatch(addJob(adeddJob))
         }
-    };
+    }
     return (
         <JobWrap>
             <TabContext value={value}>
@@ -72,7 +78,7 @@ export default function Jobs() {
                 <TabPanel
                     sx={{ "padding": "0" }}
                     value="1">
-                    {jobs ? jobs.map((job) => (
+                    {jobs ? jobs.slice(0, count).map((job) => (
                         <JobCard handleClick={(event) => {
                             event.stopPropagation();
                             handleJobClick(job.id);
@@ -82,22 +88,28 @@ export default function Jobs() {
                                     <FavoriteOutlinedIcon />
                                     : <FavoriteBorderOutlinedIcon />} />
                     )) : <Loading />}
+                    {jobs.length !== count && <LoadMoreBtn onClick={() => {
+                        setCount(count + 2)
+                        dispatch(getJobs(count))
+                    }}>Load more jobs</LoadMoreBtn>}
                 </TabPanel>
                 <TabPanel
                     sx={{ "padding": "0" }}
-                    value="2">
-                    {matchJob.length !== 0 ?
-                        matchJob.map((job) => (
-                            <JobCard handleClick={(event) => {
-                                event.stopPropagation();
-                                handleJobClick(job.id);
-                            }}
-                                key={job.id} data={job} btn={
-                                    jobSaved.find((item) => item.id === job.id) ?
-                                        <FavoriteOutlinedIcon />
-                                        : <FavoriteBorderOutlinedIcon />} />))
+                    value="2"
+                >
+                    {isLoading ? <Loading /> :
+                        recent.length !== 0 ?
+                            recent.map((job) => (
+                                <JobCard handleClick={(event) => {
+                                    event.stopPropagation();
+                                    handleJobClick(job.id);
+                                }}
+                                    key={job.id} data={job} btn={
+                                        jobSaved.find((item) => item.id === job.id) ?
+                                            <FavoriteOutlinedIcon />
+                                            : <FavoriteBorderOutlinedIcon />} />))
 
-                        : <NoJob match />
+                            : <NoJob match />
                     }
                 </TabPanel>
                 <TabPanel

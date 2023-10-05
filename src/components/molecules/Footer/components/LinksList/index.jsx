@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { FooterListColumn, FooterListItem, FooterListItemLink, ListImgLinks, SocialLink } from './syle'
 

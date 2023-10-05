@@ -4,7 +4,7 @@ import { colors } from "@/styles/colors";
 
 export const Horizantial = styled.hr`
     width: 100%;
-    height: 1px;
-    border: ${colors.border.primaryBorder};
-    margin: ${props => props.margin || '0'}
+    border: 0;
+    border-top: ${colors.border.card};
+    margin: 50px 0 20px;
 `

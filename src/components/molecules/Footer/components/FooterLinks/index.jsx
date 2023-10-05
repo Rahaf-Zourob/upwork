@@ -1,7 +1,8 @@
-import { StyledFlexEquleSapces } from '@/styles/commen'
+'use client'
 import React from 'react'
 import LinksList from '../LinksList'
 import { FooterList1, FooterList2, FooterList3, FooterList4, MobileAppLinks, SocialLinks } from '@/mock/footerLinks'
+import { StyledFlexEquleSapces } from '@/styles/commen'
 import { FlexWidth, ListImgLinks, SocialHeader, StyleFooterHome } from '../LinksList/syle'
 
 export default function FooterLinks() {

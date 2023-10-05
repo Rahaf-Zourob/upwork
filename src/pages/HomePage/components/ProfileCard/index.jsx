@@ -17,7 +17,7 @@ export default function ProfileCard() {
     const handleNavigate = () => {
         router.push(PATH.PROFILE)
     }
-    useEffect(()=>{ dispatch(getData()) }, [])
+    useEffect(()=>{ dispatch(getData(localStorage.getItem('id'))) }, [])
     return (
         <BorderProfile>
             <StyledColumn>

@@ -1,7 +1,7 @@
+'use client'
+import React from 'react'
 import { H4 } from '@/components/atoms/Typography/style'
 import { StyledColumnCenter } from '@/styles/commen'
-import React from 'react'
-
 export default function NoJob({match}) {
   return (
     <StyledColumnCenter gap='1rem'>

@@ -1,3 +1,4 @@
+"use client"
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -10,7 +11,7 @@ export const jobSlice = createSlice({
   initialState: {
     jobs: [],
     jobSaved: [],
-    userSkilles: null,
+    recentJobs: [],
     skills: [],
     job: null,
     isLoading: false,
@@ -39,6 +40,9 @@ export const jobSlice = createSlice({
       state.jobSaved = [...state.jobSaved.filter((item) => item.id !== action.payload)];
       state.isLoading = false;
     },
+    addRecentJobData: (state, action) => {
+      state.recentJobs = action.payload;
+    },
     getJobsSkills: (state, action) => {
       state.skills = action.payload;
       state.isLoading = false;
@@ -49,17 +53,29 @@ export const jobSlice = createSlice({
     },
   },
 });
-const { setLoading, getSavedData, addJobs, removeJobs, getJobsData, getJobData, getJobsSkills } = jobSlice.actions;
+const { setLoading, getSavedData, addJobs, removeJobs, getJobsData, getJobData, addRecentJobData, getJobsSkills } = jobSlice.actions;
 
 export const getJobs = () => async (dispatch) => {
+  dispatch(setLoading());
   try {
-    dispatch(setLoading());
     const { data } = await axios.get(ApiUrl + AUTH_API_PATHS.JOBS);
+    // if (body !== null) {
+    //   data.map((job) => {
+    //     job?.skills?.map(async(sameSkill) => {
+    //       if (body?.skills.includes(sameSkill)) {
+    //         const {data} =  await axios.post(ApiUrl + AUTH_API_PATHS.MOSTRECENT,job)
+    //         console.log(data)
+    //         dispatch(addRecentJobData(data));
+    //       }
+    //     })
+    //   });
+    // }
     dispatch(getJobsData(data));
+    ;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
-};
+}
 
 export const getSavedJob = () => async (dispatch) => {
   dispatch(setLoading());

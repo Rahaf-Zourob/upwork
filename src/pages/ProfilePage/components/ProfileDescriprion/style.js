@@ -1,6 +1,7 @@
-import { colors } from "@/styles/colors";
-import { HoverLink, StyledFlexEquleSapces } from "@/styles/commen";
 import styled from "styled-components";
+
+import { colors } from "@/styles/colors";
+import { HoverLink, StyleFlex, StyledFlexEquleSapces } from "@/styles/commen";
 
 export const StylePadding = styled.div`
 width: 100%;
@@ -9,16 +10,19 @@ border-bottom: ${colors.border.card};
 `
 export const Title = styled(StyledFlexEquleSapces)`
 margin-bottom: 15px;
+`
+export const TitleJob = styled.div`
+max-width: 60%;
+    div{
+        display: inline;
+    }
+`
+export const TitleHour = styled(StyledFlexEquleSapces)`
+width:20%;
 h4{
     display: flex;
     align-items: center;
     width: 20%;
-    gap: 8px;
-};
-h3{
-    display: flex;
-    align-items: center;
-    width: 70%;
     gap: 8px;
 };
 `
@@ -28,5 +32,8 @@ padding-top: 5px;
 color: ${colors.palette.green};
 &:hover{
     color: ${colors.hover.green}
-}
+};
+`
+export const EditRate = styled(StyleFlex)`
+margin: 40px 0 0;
 `

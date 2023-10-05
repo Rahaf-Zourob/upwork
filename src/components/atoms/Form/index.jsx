@@ -1,8 +1,8 @@
+'use client'
 import React from 'react'
-
-export default function Form({ children, handleSubmitForm }) {
+export default function Form({ children, handleSubmitForm,formId }) {
     return (
-        <form onSubmit={handleSubmitForm}>{children}</form>
+        <form id={formId} onSubmit={handleSubmitForm}>{children}</form>
         )
 }
 

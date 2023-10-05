@@ -25,7 +25,6 @@ export const skills = [
     { value: 'typescript', label: 'Typescript' },
     { value: 'javascript', label: 'Javascript' },
     { value: 'qa', label: 'QA' }
-
 ]
 
 export const Languge = [

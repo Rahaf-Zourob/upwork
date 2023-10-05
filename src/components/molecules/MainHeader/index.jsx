@@ -14,7 +14,7 @@ import ProfileBox from './components/RightSide/components/ProfileBox';
 
 export default function MainHeader() {
   const router = useRouter();
-  const { logout } = useAuth()
+  const { logout, id } = useAuth()
   const [showList, setShowList] = useState(false)
   const handleShowList = () => {
     setShowList(!showList)
@@ -26,7 +26,7 @@ export default function MainHeader() {
           <StyledFlexEquleSapces>
             <StyleLogo onClick={() => router.push(PATH.HOME)}>{LogoImge}</StyleLogo>
             <RightSide handleClick={handleShowList} />
-              {showList ? <ProfileBox /> : ""}
+            {showList ? <ProfileBox id={id} /> : ""}
           </StyledFlexEquleSapces>
         </ContainerLayOut>
       </Header>
