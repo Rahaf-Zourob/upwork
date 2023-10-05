@@ -12,6 +12,7 @@ export const profileSlice = createSlice({
     object: null,
     isLoading: true,
     name: null,
+    isChange: false
   },
   reducers: {
     setLoading: (state, { payload = false }) => {
@@ -25,10 +26,13 @@ export const profileSlice = createSlice({
     },
     setProfileData: (state, action) => {
       state.object = action.payload;
+    },
+    setIsChange: (state) => {
+      state.isChange = !state.isChange
     }
   },
 });
-const { getProfileData, setProfileData, setLoading, getNameData } = profileSlice.actions;
+const { getProfileData, setProfileData, setLoading, getNameData, setIsChange } = profileSlice.actions;
 
 export const getData = (id) => async (dispatch) => {
   try {
@@ -66,6 +70,7 @@ export const editJobTitle = (id, oldData, body) => async (dispatch) => {
   }
   try {
     await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE + "/" + id, { data: data });
+    dispatch(setIsChange())
   } catch (error) {
     console.log(error)
   }
@@ -78,6 +83,7 @@ export const editHourPrice = (id, oldData, body) => async (dispatch) => {
   }
   try {
     await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE + "/" + id, { data: data });
+    dispatch(setIsChange())
   } catch (error) {
     console.log(error)
   }
@@ -90,6 +96,7 @@ export const editJobDescription = (id, oldData, body) => async (dispatch) => {
   }
   try {
     await axios.patch(ApiUrl + AUTH_API_PATHS.PROFILE + "/" + id, { data: data });
+    dispatch(setIsChange())
   } catch (error) {
     console.log(error)
   }

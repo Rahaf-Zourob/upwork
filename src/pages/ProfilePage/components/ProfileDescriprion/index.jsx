@@ -35,7 +35,7 @@ export default function ProfileDescription() {
   const { register, watch, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(priceSchema())
   });
-  const { object, isLoading, jobTitle,jobDescription } = useSelector((state) => state.profile);
+  const { object, isLoading, isChange } = useSelector((state) => state.profile);
   const [newHourPrice, setNewHourPrice] = useState(0)
   const [newJobTitle, setNewJobTitle] = useState(null);
   const [newJobDescription, setNewJobDescription] = useState(null)
@@ -50,7 +50,7 @@ export default function ProfileDescription() {
     setNewHourPrice(object?.data.price)
     setNewJobDescription(object?.data.jobDescription)
     setReacive(object?.data.price * 0.9)
-  }, []);
+  }, [isChange]);
 
   const handleChangeHourPrice = (e) => {
     setNewHourPrice(e.target.value);
